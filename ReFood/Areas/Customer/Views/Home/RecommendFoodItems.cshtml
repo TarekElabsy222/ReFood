@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FoodItemVM>
+
+@{
+    ViewBag.Title = "Recommended Food Items";
+}
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+else if (Model != null && Model.Any())
+{
+    <partial name="_HeaderPartial" />
+    <div class="menu" style="margin-top: 115px">
+        <div class="container">
+            <div class="menu-title">
+                <h3>People with Similar Medical Conditions Also Chose</h3>
+            </div>
+            <div class="menu-box" id="foodItems">
+                @foreach (var itemVM in Model)
+                {
+                    <div class="menu-item">
+                        <img class="card-image" src="@Url.Content("/" + itemVM.FoodItem.ImageUrl)" alt="@itemVM.FoodItem.Name" />
+                        <div class="card-detail">
+                            <h4>@itemVM.FoodItem.Name</h4>
+                            <p>@itemVM.FoodItem.Description</p>
+                            <span class="price">@itemVM.FoodItem.Price $</span>
+                            <div class="card-add">
+                                <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                                <a class="add-cart" asp-action="Details" asp-route-id="@itemVM.FoodItem.Id"> View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+<p>No recommended items available.</p>
+}

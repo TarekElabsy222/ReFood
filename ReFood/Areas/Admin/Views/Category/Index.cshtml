@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewBag.PageTitle = "Category Managment";
+    ViewBag.CardTitle = "View Category";
+    ViewData["Title"] = "View Category";
+}
+
+<partial name="_Toster" />
+<div>
+    <a asp-action="Create" class="btn btn-primary">Create</a>
+</div>
+<br />
+<table class="table table-hover" width="100%">
+    <tr>
+        <td>Name</td>
+        <td>Action</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

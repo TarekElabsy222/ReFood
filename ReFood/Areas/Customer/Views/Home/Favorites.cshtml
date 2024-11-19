@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Favorite>
+
+<h3>Your Favorite Food Items</h3>
+
+@if (Model != null && Model.Any())
+{
+    <div class="food-items">
+        @foreach (var favorite in Model)
+        {
+            <div class="food-item">
+                <img src="@Url.Content(favorite.FoodItem.ImageUrl)" alt="@favorite.FoodItem.Name" class="food-image" style="width: 150px; height: auto;" />
+                <h4>@favorite.FoodItem.Name</h4>
+                <p>@favorite.FoodItem.Description</p>
+                <p>Price: $@favorite.FoodItem.Price</p>
+                <form asp-action="RemoveFromFavorites" method="post">
+                    <input type="hidden" name="foodItemId" value="@favorite.FoodItemId" />
+                    <button type="submit" class="btn btn-danger">Remove from Favorites</button>
+                </form>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>You have no favorite items.</p>
+}

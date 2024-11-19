@@ -1,0 +1,29 @@
+﻿<!-- Start Header  -->
+<header>
+    <a href="~/Customer/Home/Index" class="logo"><i class="fas fa-utensils"></i> ReFood</a>
+    <nav>
+        <ul class="navbar">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a href="~/Admin/Dashboard">Dashboard</a></li>
+                }
+                else
+                {
+                    <li><a href="/Customer/Orders">My Order</a></li>
+                    <li><a href="/Customer/Home/RecommendFoodItems">Recmmend Food</a></li>
+                }
+            }
+
+            <partial name="_LoginPartial" />
+        </ul>
+    </nav>
+    <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <a href="#" class="fas fa-heart"></a>
+        @await Component.InvokeAsync("ShoppingCartSummary")
+    </div>
+</header>
+<!-- End header  -->

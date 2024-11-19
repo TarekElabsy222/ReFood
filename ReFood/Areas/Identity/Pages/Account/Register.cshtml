@@ -1,0 +1,122 @@
+﻿@page
+@using ReFood.Entities.Enum
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<link href="~/customer/style/style-regester.css" rel="stylesheet" />
+<body>
+    <div class="container">
+        <div class="head-regst">Registration</div>
+
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="form first">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label asp-for="Input.Name">Full Name</label>
+                            <input asp-for="Input.Name"  autocomplete="off" aria-required="true" placeholder="Enter your FullName">
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.Email">Mail</label>
+                            <input asp-for="Input.Email"  autocomplete="off" aria-required="true" placeholder="Enter your Email">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.Password">Password</label>
+                            <input asp-for="Input.Password"  autocomplete="off" aria-required="true" placeholder="Enter your Password">
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                            <input asp-for="Input.ConfirmPassword"  autocomplete="off" aria-required="true" placeholder="Enter your Confirm Password">
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.Gender">Gender</label>
+                            <select asp-for="Input.Gender" aria-required="true" asp-items="@Html.GetEnumSelectList<Gender>()" autocomplete="off">
+                                <option disabled selected>Select Your gender</option>
+                            </select>
+                            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                        </div>
+                        @* <div class="input-field">
+                            <label>Gender</label>
+                            <select required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div> *@
+
+                        <div class="input-field">
+                            <label asp-for="Input.HasChildren">Has Children</label>
+                            <select asp-for="Input.HasChildren" aria-required="true" asp-items="@Html.GetEnumSelectList<HasChildren>()" autocomplete="off">
+                                <option disabled selected>Choose yes or No</option>
+                            </select>
+                            <span asp-validation-for="Input.HasChildren" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <span class="title">Dietary Details & Health Information</span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label asp-for="Input.PreferredCuisine">Preferred Cuisine</label>
+                            <select asp-for="Input.PreferredCuisine" aria-required="true" asp-items="@Html.GetEnumSelectList<PreferredCuisine>()" autocomplete="off">
+                                <option disabled selected>Choose Preferred Cuisine</option>
+                            </select>
+                            <span asp-validation-for="Input.PreferredCuisine" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.MedicalConditions">Medical Conditions</label>
+                            <select asp-for="Input.MedicalConditions" aria-required="true" asp-items="@Html.GetEnumSelectList<MedicalConditions>()" autocomplete="off">
+                                <option disabled selected>Choose Medical Conditions</option>
+                            </select>
+                            <span asp-validation-for="Input.MedicalConditions" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-field">
+                            <label asp-for="Input.IsVegan">Isvegan</label>
+                            <select asp-for="Input.IsVegan" aria-required="true" asp-items="@Html.GetEnumSelectList<IsVegan>()" autocomplete="off">
+                                <option disabled selected>Choose Yes or No</option>
+                            </select>
+                            <span asp-validation-for="Input.IsVegan" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+
+                    <button class="nextBtn" id="registerSubmit" type="submit">
+                        Register>
+                        <span class="btnText">Submit</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="links">
+                <span>Already a member? <a href="/Identity/Account/Login">Login Now</a></span>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

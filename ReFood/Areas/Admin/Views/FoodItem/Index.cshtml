@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.PageTitle = "Food Managment";
+    ViewBag.CardTitle = "View Food Item";
+    ViewData["Title"] = "View Food";
+}
+<link href="~/lib/datatables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<partial name="_Toster" />
+<div>
+    <a asp-action="Create" class="btn btn-primary">Create</a>
+</div>
+<br />
+<table  class="table table-hover" width="100%" id="fooditem">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+        <td>Calories</td>
+        <td>Fat</td>
+        <td>Carbs</td>
+        <td>Protein</td>
+        <td>Category</td>
+        <td>Action</td>
+    </tr>
+    </thead>
+    
+</table>
+@section Scripts {
+    <script src="~/lib/datatables/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.js"></script>
+    <script src="~/js/fooditem.js"></script>
+}

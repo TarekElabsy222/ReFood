@@ -1,0 +1,159 @@
+﻿@model FoodItem
+
+<partial name="_HeaderPartial" />
+<!-- Start Search Box  -->
+<form action="" id="search-form">
+    <input type="search" placeholder="search here..." name="" id="search-box">
+    <label for="search-box" class="fas fa-search"></label>
+    <i class="fas fa-times" id="close"></i>
+</form>
+<!-- End Search Box  -->
+
+<section>
+    <div class="modal-box">
+        <div class="model-content">
+            <img src="~/@Model.ImageUrl">
+            <div class="content">
+                <div class="content-name">
+                    <h2>@Model.Name</h2>
+                    <h2>@Model.Price$</h2>
+                </div>
+                <p>@Model.Description</p>
+                <ul class="category">
+                    <li>
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" color="green" xmlns="http://www.w3.org/2000/svg" style="color: green;"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 16H5V5h14v14z"></path><circle cx="12" cy="12" r="5"></circle></svg>
+                        Vegan
+                    </li>
+                    <li>@Model.Category.Name</li>
+                </ul>
+                <h4>Nutrition Facts (per serving)</h4>
+                <div class="fats">
+                    <ul>
+                        <li>@Model.Calories mg<br>Calories</li>
+                        <li>@Model.Fat gm<br>Fat</li>
+                        <li>@Model.Carbs gm<br>Carbs</li>
+                        <li>@Model.Protein gm<br>Protien</li>
+                    </ul>
+                </div>
+                <a asp-controller="Orders" asp-action="AddToCart" asp-route-id="@Model.Id">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Add To Card
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer-text">
+        <h5>Made by <span>ReFood Team</span> ❤</h5>
+    </div>
+</footer>
+<style>
+section {
+    height: 79vh;
+    margin-top: 120px;
+}
+    ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-box {
+  margin: 0 30px;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  border-radius: 24px;
+  background-color: #fff;
+}
+.modal-box .model-content {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+.modal-box .content {
+    width:100%;
+}
+.modal-box .model-content img{
+  border-radius: 15px;
+  width: 70%;
+}
+
+.modal-box  .model-content .content-name{
+  display: flex;
+  justify-content: space-between;
+  margin:0 0 15px 0;
+}
+.modal-box .model-content  .category {
+  display: flex;
+  margin: 20px 0;
+  gap: 15px;
+}
+.modal-box .model-content .category li {
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  padding: 5px 10px;
+}
+
+.modal-box .model-content .content-name >h2 {
+  margin-top: 0;
+  font-weight: 900;
+  position: relative;
+}
+.modal-box .model-content .content-name p {
+    line-height: 2;
+}
+.modal-box .model-content .content-name>h2:first-child:before {
+  content: '';
+  position: absolute;
+  border-bottom: 2px solid orange;
+  width: 75%;
+  bottom: 0;
+}
+.modal-box .model-content h4 {
+  margin: 0 0 20px 0;
+  color: hsla(215, 25%, 27%, 1);
+}
+.modal-box .model-content .fats {
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.modal-box .model-content .fats ul {
+  display: flex;
+  margin: 20px 0;
+  justify-content: space-around;
+  color: hsla(215, 25%, 27%, 1);
+}
+
+.modal-box h2 {
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 500;
+  color: #333;
+}
+.modal-box h3 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  text-align: center;
+}
+
+.modal-box a {
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: orangered;
+    color: #fff;
+    cursor: pointer;
+    margin: 26px 0;
+}
+.modal-box a:hover {
+    background-color: rgba(249, 115, 22, 1);
+    color: #fff;
+}
+</style>

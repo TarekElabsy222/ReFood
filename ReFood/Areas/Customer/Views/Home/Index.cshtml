@@ -1,0 +1,118 @@
+﻿@model HomeViewModel
+<partial name="_HeaderPartial"/>
+<!-- Start Search Box  -->
+<form action="" id="search-form">
+    <input type="search" placeholder="search here..." name="" id="search-box">
+    <label for="search-box" class="fas fa-search"></label>
+    <i class="fas fa-times" id="close"></i>
+</form>
+<!-- End Search Box  -->
+<!-- Start Explore menu  -->
+<div class="explore-menu">
+    <div class="container">
+        <div class="intro-text">
+            <h1>Order your<br>favourite food here</h1>
+            <p>Choose from a diverse menu featuring a delectable array of dishes. Our mission is to satisfy your cravings and elevate your dining experience, one delicious meal at a time.</p>
+            <button>Show Menu</button>
+        </div>
+    </div>
+</div>
+<!-- End Explore Menu  -->
+
+<div class="menu-category">
+    <div class="container">
+        <div class="menu-title">
+            <h3>Explore our category</h3>
+        </div>
+        <div class="category">
+            <a href="#" class="category-item" onclick="Getdata(null, event)">
+                <img src="~/customer/imgs/menu_3.png" alt="">
+                <p>All</p>
+            </a>
+            @foreach (var item in Model.Categories)
+            {
+                <a href="#" class="category-item" onclick="Getdata(@item.Id, event)">
+                    <img src="~/@item.ImageUrl" alt="">
+                    <p>@item.Name</p>
+                </a>
+            }
+        </div>
+        <hr>        
+    </div>
+</div>
+
+<div class="menu">
+    <div class="container">
+        <div class="menu-title">
+            <h3>Top dishes Menu</h3>
+        </div>
+        <div class="menu-box" id="foodItems">
+            @foreach (var item in Model.FoodItems)
+            {
+                <div class="menu-item">
+                    <img class="card-image" src="@Url.Content("/" + @item.ImageUrl)" alt="" />
+                    <div class="card-detail">
+                        <h4>@item.Name</h4>
+                        <p>@item.Description</p>
+                        <span class="price">@item.Price$</span>
+                        <div class="card-add">
+                            <button class="fav-btn"><i class="fa-regular fa-heart"></i></button>
+                            <a class="add-cart" asp-action="Details" asp-route-id="@item.Id"> View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function Getdata(categoryId, event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+
+            var url = '@Url.Action("Category", "Home")';
+            if (categoryId === null) {
+                // Modify the URL to fetch all food items if categoryId is null
+                url = '@Url.Action("GetAllFoodItems", "Home")';
+            }
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: categoryId !== null ? { categoryId: categoryId } : {},
+                success: function (data) {
+                    var foodItemsDiv = $('#foodItems');
+                    foodItemsDiv.empty();
+                    data.forEach(function (item) {
+                        var detailsUrl = '@Url.Action("Details", "Home", new { id = "__id__" })'.replace('__id__', item.id);
+
+                        foodItemsDiv.append(
+                            '<div class="menu-item">' +
+                            '<img class="card-image" src="' + item.imageUrl + '" alt="" />' +
+                            '<div class="card-detail">' +
+                            '<h4>' + item.name + '</h4>' +
+                            '<p>' + item.description + '</p>' +
+                            '<span class="price">' + item.price + '$</span>' +
+                            '<div class="card-add">' +
+                            '<button class="fav-btn"><i class="fa-regular fa-heart"></i></button>' +
+                            '<a class="add-cart" href="' + detailsUrl + '"> View Details</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    });
+                },
+                error: function () {
+                    alert('An error occurred while fetching the food items.');
+                }
+            });
+        }
+    </script>
+}
+<footer>
+    <div class="footer-text">
+        <h5>Made by <span>ReFood Team</span> ❤</h5>
+    </div>
+</footer>

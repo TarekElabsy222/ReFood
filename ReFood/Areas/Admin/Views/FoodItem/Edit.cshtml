@@ -1,0 +1,78 @@
+﻿@model FoodItemVM
+@{
+	ViewBag.PageTitle = "Food Managment";
+	ViewBag.CardTitle = "Edit Food Item";
+	ViewData["Title"] = "Edit Food";
+}
+<div class="row mr-5" width="100%" style="justify-content:space-between">
+	<div class="col-md-4">
+		<form method="post" action="Edit" enctype="multipart/form-data">
+			<input type="hidden" asp-for="FoodItem.Id" />
+			<input type="hidden" asp-for="FoodItem.ImageUrl" />
+			<div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Name"></label>
+					<input asp-for="FoodItem.Name" class="form-control" />
+					<span asp-validation-for="FoodItem.Name" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Description"></label>
+					<input asp-for="FoodItem.Description" class="form-control" />
+					<span asp-validation-for="FoodItem.Description" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.ImageUrl"></label>
+					<input type="file" name="file" id="imgfile" class="form-control" />
+					<span asp-validation-for="FoodItem.ImageUrl" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Price"></label>
+					<input asp-for="FoodItem.Price" class="form-control" />
+					<span asp-validation-for="FoodItem.Price" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Calories"></label>
+					<input asp-for="FoodItem.Calories" class="form-control" />
+					<span asp-validation-for="FoodItem.Calories" class="text-danger"></span>
+				</div>
+			</div>
+			<div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Fat"></label>
+					<input asp-for="FoodItem.Fat" class="form-control" />
+					<span asp-validation-for="FoodItem.Fat" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Carbs"></label>
+					<input asp-for="FoodItem.Carbs" class="form-control" />
+					<span asp-validation-for="FoodItem.Carbs" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.Protein"></label>
+					<input asp-for="FoodItem.Protein" class="form-control" />
+					<span asp-validation-for="FoodItem.Protein" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label asp-for="FoodItem.CategoryId"></label>
+					<select asp-for="FoodItem.CategoryId" class="form-control" asp-items="Model.CategoryList">
+						<option disabled selected>-- Select Category --</option>
+					</select>
+					<span asp-validation-for="FoodItem.CategoryId" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<button type="submit" class="btn btn-success">Save</button>
+					<a asp-action="Index" class="btn btn-warning">Back to Category</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-4">
+		<div class="container">
+			<h4 class="mb-3 mr-5" style="text-align:center">Review Photo</h4>
+			<img src="~/@Model.FoodItem.ImageUrl" width="300" height="300"/>
+		</div>
+	</div>
+</div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial"></partial>
+}

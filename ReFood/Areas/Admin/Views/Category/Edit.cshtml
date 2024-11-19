@@ -1,0 +1,30 @@
+﻿@model Category
+@{
+	ViewBag.PageTitle = "Category Managment";
+	ViewBag.CardTitle = "Edit Category";
+	ViewData["Title"] = "Edit Page";
+}
+<div class="row">
+	<div class="col-md-4">
+		<form method="post" action="Edit">
+			<input hidden asp-for="Id" />
+			<div class="mb-3">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="ImageUrl"></label>
+				<input asp-for="ImageUrl" class="form-control" />
+				<span asp-validation-for="ImageUrl" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary">Save</button>
+				<a asp-action="Index" class="btn btn-warning">Back to Category</a>
+			</div>
+		</form>
+	</div>
+</div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial"></partial>
+}

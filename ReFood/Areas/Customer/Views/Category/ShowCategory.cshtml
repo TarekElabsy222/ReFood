@@ -1,0 +1,49 @@
+﻿@model List<Category>
+
+<div class="menu-category">
+    <div class="container">
+        <div class="menu-title">
+            <h3>Explore our category</h3>
+        </div>
+        <div class="category">
+            @foreach (var item in Model)
+            {
+                <a href="#" class="category-item" onclick="Getdata(@item.Id)">
+                    <p>@item.Name</p>
+                </a>
+            }
+        </div>
+        <hr>
+        <div id="foodItems">
+            <!-- Food items will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function Getdata(categoryId) {
+            $.ajax({
+                url: '@Url.Action("Getfood", "Category")',
+                type: 'GET',
+                data: { categoryId: categoryId },
+                success: function (data) {
+                    var foodItemsDiv = $('#foodItems');
+                    foodItemsDiv.empty();
+                    data.forEach(function (item) {
+                        foodItemsDiv.append(
+                            '<div class="food-item">' +
+                            '<h3>' + item.name + '</h3>' +
+                            '<p>' + item.description + '</p>' +
+                            '<p>Price: ' + item.price + '</p>' +
+                            '</div>'
+                        );
+                    });
+                },
+                error: function () {
+                    alert('An error occurred while fetching the food items.');
+                }
+            });
+        }
+    </script>
+}

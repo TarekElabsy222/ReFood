@@ -1,0 +1,64 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<link href="~/customer/style/style-login.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="container-login">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login</span>
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <form id="account" method="post">
+                    <div class="input-field">
+                        <input asp-for="Input.Email"  autocomplete="off" aria-required="true" placeholder="Enter Your Email">
+                        <i class="uil uil-envelope icon"></i>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="input-field">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="off" aria-required="true" placeholder="Enter your password" >
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input  asp-for="Input.RememberMe" id="logCheck">
+                            <label for="logCheck" asp-for="Input.RememberMe"> @Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                        </div>
+
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
+
+                    <div class="input-field button">
+                        <button  value="Login" id="login-submit" type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">
+                        Not a member?
+                        <a href="/Identity/Account/Register" class="text signup-link">Signup Now</a>
+                    </span>
+                    <br />
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <br />
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+   
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

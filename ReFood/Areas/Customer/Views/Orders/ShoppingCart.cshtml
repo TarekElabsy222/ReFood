@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ShoppingCartItem>
+@{
+	ViewData["Title"] = "Shopping Cart Summary";
+}
+
+
+<partial name="_HeaderPartial" />
+<!-- Start Search Box  -->
+<form action="" id="search-form">
+    <input type="search" placeholder="search here..." name="" id="search-box">
+    <label for="search-box" class="fas fa-search"></label>
+    <i class="fas fa-times" id="close"></i>
+</form>
+<!-- End Search Box  -->
+
+<!-- Shopping cart table -->
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Product</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Price</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Quantity</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Total</div>
+                </th>
+                <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Add & Remove</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row" class="border-0">
+                        <div class="p-2">
+                            <img src="~/@item.FoodItem.ImageUrl" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="ml-3 d-inline-block align-middle">
+                                <h5 class="mb-0"> <b class="text-dark d-inline-block align-middle">@item.FoodItem.Name</b></h5>
+                            </div>
+                        </div>
+                    </th>
+                    <td class="border-0 align-middle"><strong>@item.FoodItem.Price</strong></td>
+                    <td class="border-0 align-middle"><strong>@item.Amount</strong></td>
+                    <td class="border-0 align-middle"><strong>@((item.FoodItem.Price * @item.Amount).ToString("c"))</strong></td>
+                    <td class="border-0 align-middle">
+                        <a asp-controller="Orders" asp-action="RemoveFromCart" asp-route-id="@item.FoodItem.Id">
+                            <i class="fas fa-regular fa-minus"></i>
+                        </a>
+                        <a asp-controller="Orders" asp-action="AddToCart" asp-route-id="@item.FoodItem.Id">
+                            <i class="fas fa-regular fa-plus"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            <tr style="border-top: 1px solid #ddd;">
+                <td colspan="3" class="border-0 "><strong>Total</strong></td>
+                <td class="border-0 align-middle"><strong>@ViewBag.Total.ToString("c")</strong></td>
+
+        </tbody>
+    </table>
+    
+</div>
+<div class="liks" style="text-align: center; margin-top:50px;" >
+    <div class="btn btn-group">
+        <a style="margin:60px;" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-regular fa-refresh">  Continue Shopping</i>
+        </a>
+        
+        <a  asp-controller="Orders" asp-action="CompleteOrder">
+            <i class="fas fa-regular fa-check">  Complete Order</i>
+        </a>
+    </div>
+</div>
+<!-- End -->
+
+<style>
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 150px;
+    }
+
+    .table {
+        width: 75%;
+        margin-bottom: 1rem;
+        color: #212529;
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+            background-color: #f8f9fa;
+            text-transform: uppercase;
+            padding: 1rem;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .table .border-0 {
+            border: 0;
+        }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .rounded {
+        border-radius: 0.25rem;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .text-uppercase {
+        text-transform: uppercase;
+    }
+
+    .text-dark {
+        color: #343a40 !important;
+    }
+
+    .font-weight-normal {
+        font-weight: 400;
+    }
+
+    .font-italic {
+        font-style: italic;
+    }
+
+    .p-2 {
+        padding: 0.5rem !important;
+    }
+
+    .px-3 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .ml-3 {
+        margin-left: 1rem !important;
+    }
+
+    .align-middle {
+        vertical-align: middle !important;
+    }
+
+    td {
+        text-align: center;
+    }
+   td   a ,
+    .liks  a {
+        color: white;
+        letter-spacing: 2px;
+        background-color: orange;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin: 10px
+    }
+
+</style>

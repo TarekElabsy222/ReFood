@@ -1,0 +1,9 @@
+﻿@model int;
+@if (Model > 0)
+{
+	<a class="cart-icon" style="background: white;" asp-controller="orders" asp-action="ShoppingCart">
+		<i class="fas fa-shopping-cart"></i>
+		<span style="color: #192a56;">@Model</span>
+	</a>
+	<b style="color: red;font-size: 13px;">@ViewBag.Total.ToString("c")</b>
+}
